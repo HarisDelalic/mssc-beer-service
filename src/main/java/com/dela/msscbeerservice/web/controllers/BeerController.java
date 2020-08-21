@@ -29,9 +29,10 @@ public class BeerController {
         return new ResponseEntity<BeerDto>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/{upc}")
-    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") Long upc) {
-
-        return new ResponseEntity<BeerDto>(BeerDto.builder().build(), HttpStatus.OK);
-    }
+//    Commented due to ambiguity with getBeerById method
+//    @GetMapping("/{upc}")
+//    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") Long upc) {
+//
+//        return new ResponseEntity<BeerDto>(BeerDto.builder().build(), HttpStatus.OK);
+//    }
 }
