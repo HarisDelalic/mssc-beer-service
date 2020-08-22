@@ -1,6 +1,7 @@
 package com.dela.msscbeerservice.web.controllers;
 
 import com.dela.msscbeerservice.web.models.BeerDto;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,18 @@ public class BeerController {
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
 
-        return new ResponseEntity<>(BeerDto.builder().build(), HttpStatus.OK);
+        return new ResponseEntity<>(BeerDto.builder().beerName("Ozujsko").build(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<BeerDto> saveNewBeer(@RequestBody BeerDto beerDto) {
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        BeerDto savedNewBeer = BeerDto.builder().id(UUID.randomUUID()).build();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", "/api/v1/beers/" + savedNewBeer.getId());
+
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
@@ -29,10 +35,8 @@ public class BeerController {
         return new ResponseEntity<BeerDto>(HttpStatus.NO_CONTENT);
     }
 
-//    Commented due to ambiguity with getBeerById method
-//    @GetMapping("/{upc}")
-//    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") Long upc) {
-//
-//        return new ResponseEntity<BeerDto>(BeerDto.builder().build(), HttpStatus.OK);
-//    }
+    @DeleteMapping("/{beerId}")
+    public ResponseEntity<BeerDto> deleteBeer(@PathVariable("beerId") UUID beerId) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
