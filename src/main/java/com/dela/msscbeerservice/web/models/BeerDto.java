@@ -1,5 +1,6 @@
 package com.dela.msscbeerservice.web.models;
 
+import com.dela.msscbeerservice.domain.Beer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,4 +25,16 @@ public class BeerDto {
 
     private OffsetDateTime createDate;
     private OffsetDateTime lastModifiedDate;
+
+    public Beer toBeer() {
+        Beer beer = Beer.builder()
+                .version(this.version)
+                .beerName(this.beerName)
+                .beerStyle(this.beerStyle)
+                .upc(this.upc)
+                .quantityOnHand(this.quantityOnHand)
+                .price(this.price)
+                .build();
+         return beer;
+    }
 }
