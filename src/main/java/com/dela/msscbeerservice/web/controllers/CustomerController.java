@@ -36,13 +36,4 @@ public class CustomerController {
 
         return new ResponseEntity<CustomerDto>(customerService.saveNewCustomer(customerDto), HttpStatus.CREATED);
     }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    ResponseEntity<List<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-
-        List<String> errors = e.getBindingResult().getFieldErrors().stream()
-                .map(ex -> ex.getField() + " : " + ex.getDefaultMessage()).collect(Collectors.toList());
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
 }

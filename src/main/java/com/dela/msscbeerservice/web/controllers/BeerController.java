@@ -54,13 +54,4 @@ public class BeerController {
     public ResponseEntity<BeerDto> deleteBeer(@PathVariable("beerId") UUID beerId) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<String>> validationErrorHandler(MethodArgumentNotValidException e) {
-        List<String> errors = e.getBindingResult().getFieldErrors().stream()
-                .map(notValidException -> notValidException.getField() + " : " + notValidException.getRejectedValue())
-                .collect(Collectors.toList());
-
-        return new ResponseEntity<List<String>>(errors, HttpStatus.BAD_REQUEST);
-    }
 }
