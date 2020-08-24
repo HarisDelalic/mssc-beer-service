@@ -21,19 +21,31 @@ import java.util.UUID;
 public class BeerDto {
     @Null
     private UUID id;
-    @NotNull
+
+    @Null
     private Integer version;
+
     @NotBlank
     private String beerName;
+
     @NotNull
     private BeerStyleEnum beerStyle;
+
+    @NotNull
     @Positive
     private Long upc;
+
+    @NotNull
+    @Positive
     private Integer quantityOnHand;
+
+    @NotNull
     @Positive
     private BigDecimal price;
 
+    @Null
     private OffsetDateTime createDate;
+    @Null
     private OffsetDateTime lastModifiedDate;
 
     public Beer toBeer() {
