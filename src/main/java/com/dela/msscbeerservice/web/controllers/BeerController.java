@@ -7,11 +7,17 @@ import com.dela.msscbeerservice.web.services.BeerService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/beers")
 public class BeerController {
@@ -23,7 +29,7 @@ public class BeerController {
     }
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
+    public ResponseEntity<BeerDto> getBeerById(@NotNull @PathVariable("beerId") UUID beerId) {
 
         return new ResponseEntity<>(BeerDto.builder().beerName("Ozujsko").build(), HttpStatus.OK);
     }
@@ -39,7 +45,7 @@ public class BeerController {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<BeerDto> updateBeer(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
+    public ResponseEntity<BeerDto> updateBeer(@NotNull @PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
 
         return new ResponseEntity<BeerDto>(HttpStatus.NO_CONTENT);
     }
@@ -47,5 +53,14 @@ public class BeerController {
     @DeleteMapping("/{beerId}")
     public ResponseEntity<BeerDto> deleteBeer(@PathVariable("beerId") UUID beerId) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<String>> validationErrorHandler(MethodArgumentNotValidException e) {
+        List<String> errors = e.getBindingResult().getFieldErrors().stream()
+                .map(notValidException -> notValidException.getField() + " : " + notValidException.getRejectedValue())
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<List<String>>(errors, HttpStatus.BAD_REQUEST);
     }
 }
