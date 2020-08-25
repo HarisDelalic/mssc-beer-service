@@ -43,14 +43,7 @@ class BeerControllerTest {
 
     @Test
     void saveNewBeer() throws Exception {
-        BeerDto beerDto = BeerDto.builder()
-                .beerName("Sarajevsko")
-                .version(2)
-                .beerStyle(BeerStyleEnum.IPA)
-                .quantityOnHand(2)
-                .upc(222L)
-                .price(BigDecimal.valueOf(2))
-                .build();
+        BeerDto beerDto = validBeerDto();
 
         String beerDtoJSON = objectMapper.writeValueAsString(beerDto);
 
@@ -64,14 +57,7 @@ class BeerControllerTest {
 
     @Test
     void updateBeer() throws Exception {
-        BeerDto beerDto = BeerDto.builder()
-                .beerName("Sarajevsko")
-                .version(2)
-                .beerStyle(BeerStyleEnum.IPA)
-                .quantityOnHand(2)
-                .upc(222L)
-                .price(BigDecimal.valueOf(2))
-                .build();
+        BeerDto beerDto = validBeerDto();
 
         String beerDtoJSON = objectMapper.writeValueAsString(beerDto);
 
@@ -79,5 +65,15 @@ class BeerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJSON))
                 .andExpect(status().isNoContent());
+    }
+
+    private BeerDto validBeerDto() {
+        return BeerDto.builder()
+                .beerName("Sarajevsko")
+                .beerStyle(BeerStyleEnum.IPA)
+                .upc(222L)
+                .quantityOnHand(2)
+                .price(BigDecimal.valueOf(2))
+                .build();
     }
 }
