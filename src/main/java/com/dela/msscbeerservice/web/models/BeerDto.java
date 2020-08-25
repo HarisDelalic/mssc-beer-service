@@ -47,16 +47,4 @@ public class BeerDto {
     private OffsetDateTime createDate;
     @Null
     private OffsetDateTime lastModifiedDate;
-
-    public Beer toBeer() {
-        Beer beer = Beer.builder()
-                .version(this.version)
-                .beerName(this.beerName)
-                .beerStyle(this.beerStyle)
-                .upc(this.upc)
-                .quantityOnHand(this.quantityOnHand)
-                .price(this.price)
-                .build();
-        return beer;
-    }
 }

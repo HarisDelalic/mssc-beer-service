@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -42,24 +43,12 @@ public class Beer {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private OffsetDateTime createDate;
+    private Timestamp createDate;
 
     @UpdateTimestamp
-    private OffsetDateTime lastModifiedDate;
+    private Timestamp lastModifiedDate;
 
     public UUID getId() {
         return id;
-    }
-
-    public BeerDto toDto() {
-        BeerDto beerDto = BeerDto.builder()
-                .version(this.version)
-                .beerName(this.beerName)
-                .beerStyle(this.beerStyle)
-                .upc(this.upc)
-                .quantityOnHand(this.quantityOnHand)
-                .price(this.price)
-                .build();
-        return beerDto;
     }
 }

@@ -1,23 +1,23 @@
 package com.dela.msscbeerservice.web.services;
 
 import com.dela.msscbeerservice.domain.Beer;
+import com.dela.msscbeerservice.mappers.BeerMapper;
 import com.dela.msscbeerservice.repositories.BeerRepository;
 import com.dela.msscbeerservice.web.models.BeerDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class BeerServiceImpl implements BeerService {
 
     private final BeerRepository beerRepository;
-
-    public BeerServiceImpl(BeerRepository beerRepository) {
-        this.beerRepository = beerRepository;
-    }
+    private final BeerMapper beerMapper;
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
-        Beer savedBeer = beerRepository.save(beerDto.toBeer());
+        Beer savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beerDto));
 
-        return savedBeer.toDto();
+        return beerMapper.beerToBeerDto(savedBeer);
     }
 }
