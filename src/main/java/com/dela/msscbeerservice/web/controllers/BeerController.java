@@ -31,7 +31,7 @@ public class BeerController {
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@NotNull @PathVariable("beerId") UUID beerId) {
 
-        return new ResponseEntity<>(BeerDto.builder().beerName("Ozujsko").build(), HttpStatus.OK);
+        return new ResponseEntity<BeerDto>(beerService.findById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -46,6 +46,8 @@ public class BeerController {
 
     @PutMapping("/{beerId}")
     public ResponseEntity<BeerDto> updateBeer(@NotNull @PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
+
+        beerService.updateBeer(beerId, beerDto);
 
         return new ResponseEntity<BeerDto>(HttpStatus.NO_CONTENT);
     }

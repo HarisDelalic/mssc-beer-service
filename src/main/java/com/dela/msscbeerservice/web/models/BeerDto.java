@@ -1,6 +1,8 @@
 package com.dela.msscbeerservice.web.models;
 
 import com.dela.msscbeerservice.domain.Beer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +22,7 @@ import java.util.UUID;
 @Builder
 public class BeerDto {
     @Null
+    @JsonProperty("beerId")
     private UUID id;
 
     @Null
@@ -41,9 +44,11 @@ public class BeerDto {
 
     @NotNull
     @Positive
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
 
     @Null
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime createDate;
     @Null
     private OffsetDateTime lastModifiedDate;
