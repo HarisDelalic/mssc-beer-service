@@ -18,7 +18,7 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public BeerDto findById(UUID beerId) {
-        return beerRepository.findById(beerId).map(beerMapper::beerToBeerDto).orElse(null);
+        return beerMapper.beerToBeerDto(beerRepository.findById(beerId).orElseThrow(RuntimeException::new));
     }
 
     @Override
@@ -29,16 +29,15 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public void updateBeer(UUID beerId, BeerDto beerDto) {
-        beerRepository.findById(beerId).ifPresent(foundBeer ->
-        {
-            foundBeer.setBeerName(beerDto.getBeerName());
-            foundBeer.setBeerStyle(beerDto.getBeerStyle());
-            foundBeer.setUpc(beerDto.getUpc());
-            foundBeer.setQuantityOnHand(beerDto.getQuantityOnHand());
-            foundBeer.setPrice(beerDto.getPrice());
-            beerRepository.save(foundBeer);
-        });
+    public BeerDto updateBeer(UUID beerId, BeerDto beerDto) {
+        Beer foundBeer = beerRepository.findById(beerId).orElseThrow(RuntimeException::new);
 
+        foundBeer.setBeerName(beerDto.getBeerName());
+        foundBeer.setBeerStyle(beerDto.getBeerStyle());
+        foundBeer.setUpc(beerDto.getUpc());
+        foundBeer.setQuantityOnHand(beerDto.getQuantityOnHand());
+        foundBeer.setPrice(beerDto.getPrice());
+
+        return beerMapper.beerToBeerDto(beerRepository.save(foundBeer));
     }
 }
