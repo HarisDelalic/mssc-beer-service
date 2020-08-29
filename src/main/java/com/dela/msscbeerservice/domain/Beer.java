@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -24,6 +25,8 @@ public class Beer {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type(type = "org.hibernate.type.UUIDCharType")
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
 
     @Version
@@ -37,17 +40,19 @@ public class Beer {
 
     @Column(name = "upc")
     private String upc;
-    @Column(name = "quantity")
-    private Integer quantityOnHand;
+
     @Column(name = "price")
     private BigDecimal price;
 
     @CreationTimestamp
     @Column(updatable = false)
-    private Timestamp createDate;
+    private Timestamp createdDate;
 
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
+
+    private Integer minOnHand;
+    private Integer quantityToBrew;
 
     public UUID getId() {
         return id;

@@ -1,12 +1,11 @@
 package com.dela.msscbeerservice.web.controllers;
 
-import com.dela.msscbeerservice.bootstrap.BeerLoader;
+import com.dela.msscbeerservice.bootstrap.BeerUpcLoader;
 import com.dela.msscbeerservice.web.models.BeerDto;
 import com.dela.msscbeerservice.web.models.BeerStyleEnum;
 import com.dela.msscbeerservice.web.services.BeerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -72,7 +71,7 @@ class BeerControllerTest {
         return BeerDto.builder()
                 .beerName("Sarajevsko")
                 .beerStyle(BeerStyleEnum.IPA)
-                .upc(BeerLoader.BEER_1_UPC)
+                .upc(BeerUpcLoader.BEER_1_UPC)
                 .quantityOnHand(2)
                 .price(BigDecimal.valueOf(2))
                 .build();
