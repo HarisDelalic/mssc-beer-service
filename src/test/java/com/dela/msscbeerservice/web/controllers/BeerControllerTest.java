@@ -1,5 +1,6 @@
 package com.dela.msscbeerservice.web.controllers;
 
+import com.dela.msscbeerservice.bootstrap.BeerLoader;
 import com.dela.msscbeerservice.web.models.BeerDto;
 import com.dela.msscbeerservice.web.models.BeerStyleEnum;
 import com.dela.msscbeerservice.web.services.BeerService;
@@ -71,7 +72,7 @@ class BeerControllerTest {
         return BeerDto.builder()
                 .beerName("Sarajevsko")
                 .beerStyle(BeerStyleEnum.IPA)
-                .upc(222L)
+                .upc(BeerLoader.BEER_1_UPC)
                 .quantityOnHand(2)
                 .price(BigDecimal.valueOf(2))
                 .build();

@@ -35,8 +35,7 @@ public class BeerDto {
     private BeerStyleEnum beerStyle;
 
     @NotNull
-    @Positive
-    private Long upc;
+    private String upc;
 
     @NotNull
     @Positive
@@ -51,5 +50,6 @@ public class BeerDto {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime createDate;
     @Null
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private OffsetDateTime lastModifiedDate;
 }

@@ -36,7 +36,7 @@ public class Beer {
     private BeerStyleEnum beerStyle;
 
     @Column(name = "upc")
-    private Long upc;
+    private String upc;
     @Column(name = "quantity")
     private Integer quantityOnHand;
     @Column(name = "price")
