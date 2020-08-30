@@ -15,4 +15,6 @@ public interface BeerService {
     BeerDto findById(UUID beerId, Boolean showInventoryOnHand);
 
     BeerPagedList getBeers(String beerName, BeerStyleEnum beerStyleEnum, PageRequest pageRequest, Boolean showInventoryOnHand);
+
+    BeerDto findByUpc(String upc, Boolean showInventoryOnHand);
 }

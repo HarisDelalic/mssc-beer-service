@@ -1,5 +1,6 @@
 <config xmlns='http://www.ehcache.org/v3'>
-    <cache alias="beerCache" uses-template="config-cache"/>
+    <cache alias="beerCacheByBeerId" uses-template="config-cache"/>
+    <cache alias="beerCacheByUpc" uses-template="config-cache"/>
     <cache alias="beerListCache" uses-template="config-cache"/>
 
     <cache-template name="config-cache">

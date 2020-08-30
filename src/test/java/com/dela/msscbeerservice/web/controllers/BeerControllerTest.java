@@ -38,6 +38,12 @@ class BeerControllerTest {
     }
 
     @Test
+    void getBeerByUpc() throws Exception {
+        mockMvc.perform(get("/api/v1/beers/beerUpc/" + BeerUpcLoader.BEER_1_UPC).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void saveNewBeer() throws Exception {
         BeerDto beerDto = validBeerDto();
 

@@ -24,18 +24,18 @@ public class BeerServiceImpl implements BeerService {
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
 
-    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
+    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false || #showInventoryOnHand == null")
     @Override
     public BeerPagedList getBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
         BeerPagedList beerPagedList = null;
         Page<Beer> beerPage;
 
         System.out.println("called");
-        if(!StringUtils.isEmpty(beerName) && beerStyle != null) {
+        if (!StringUtils.isEmpty(beerName) && beerStyle != null) {
             beerPage = beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
-        } else if(!StringUtils.isEmpty(beerName) && beerStyle == null) {
+        } else if (!StringUtils.isEmpty(beerName) && beerStyle == null) {
             beerPage = beerRepository.findAllByBeerName(beerName, pageRequest);
-        } else if(StringUtils.isEmpty(beerName) && beerStyle != null) {
+        } else if (StringUtils.isEmpty(beerName) && beerStyle != null) {
             beerPage = beerRepository.findAllByBeerStyle(beerName, pageRequest);
         } else {
             beerPage = beerRepository.findAll(pageRequest);
@@ -51,17 +51,31 @@ public class BeerServiceImpl implements BeerService {
                 beerPage.getTotalElements()
         );
 
-        return  beerPagedList;
+        return beerPagedList;
     }
 
-    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
+    @Cacheable(cacheNames = "beerCacheByUpc", key = "#upc", condition = "#showInventoryOnHand == false || #showInventoryOnHand == null")
+    @Override
+    public BeerDto findByUpc(String upc, Boolean showInventoryOnHand) {
+        Beer foundBeer = beerRepository.findByUpc(upc);
+
+        System.out.println("called");
+
+        return result(foundBeer, showInventoryOnHand);
+    }
+
+    private BeerDto result(Beer foundBeer, Boolean showInventoryOnHand) {
+        return BooleanUtils.isTrue(showInventoryOnHand) ?
+                beerMapper.beerToBeerDtoWithInventory(foundBeer) :
+                beerMapper.beerToBeerDto(foundBeer);
+    }
+
+    @Cacheable(cacheNames = "beerCacheByBeerId", key = "#beerId", condition = "#showInventoryOnHand == false || #showInventoryOnHand == null")
     @Override
     public BeerDto findById(UUID beerId, Boolean showInventoryOnHand) {
         Beer foundBeer = beerRepository.findById(beerId).orElseThrow(RuntimeException::new);
 
-        return BooleanUtils.isTrue(showInventoryOnHand) ?
-                beerMapper.beerToBeerDtoWithInventory(foundBeer) :
-                beerMapper.beerToBeerDto(foundBeer);
+        return result(foundBeer, showInventoryOnHand);
     }
 
     @Override

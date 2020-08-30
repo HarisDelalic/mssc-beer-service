@@ -5,7 +5,6 @@ import com.dela.msscbeerservice.web.models.BeerPagedList;
 import com.dela.msscbeerservice.web.models.BeerStyleEnum;
 import com.dela.msscbeerservice.web.services.BeerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -51,6 +50,12 @@ public class BeerController {
                                                @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
 
         return new ResponseEntity<BeerDto>(beerService.findById(beerId, showInventoryOnHand), HttpStatus.OK);
+    }
+
+    @GetMapping("/beerUpc/{beerUpc}")
+    public ResponseEntity<BeerDto> getBeerByUpc(@NotNull @PathVariable String beerUpc,
+                                                @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
+        return new ResponseEntity<BeerDto>(beerService.findByUpc(beerUpc, showInventoryOnHand), HttpStatus.OK);
     }
 
     @PostMapping

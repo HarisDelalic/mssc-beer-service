@@ -17,4 +17,6 @@ public interface BeerRepository extends PagingAndSortingRepository<Beer, UUID> {
     Page<Beer> findAllByBeerName(String beerName, Pageable pageRequest);
 
     Page<Beer> findAllByBeerStyle(String beerName, Pageable pageRequest);
+
+    Beer findByUpc(String upc);
 }
