@@ -5,6 +5,7 @@ import com.dela.msscbeerservice.web.models.BeerPagedList;
 import com.dela.msscbeerservice.web.models.BeerStyleEnum;
 import com.dela.msscbeerservice.web.services.BeerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
