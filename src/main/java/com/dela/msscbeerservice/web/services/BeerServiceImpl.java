@@ -1,13 +1,13 @@
 package com.dela.msscbeerservice.web.services;
 
 import com.dela.msscbeerservice.domain.Beer;
-import com.dela.msscbeerservice.mappers.BeerDecoratorMapper;
 import com.dela.msscbeerservice.mappers.BeerMapper;
 import com.dela.msscbeerservice.repositories.BeerRepository;
 import com.dela.msscbeerservice.web.models.BeerDto;
 import com.dela.msscbeerservice.web.models.BeerPagedList;
 import com.dela.msscbeerservice.web.models.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class BeerServiceImpl implements BeerService {
     private final BeerMapper beerMapper;
 
     @Override
-    public BeerPagedList getBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest) {
+    public BeerPagedList getBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
         BeerPagedList beerPagedList = null;
         Page<Beer> beerPage;
 
@@ -38,7 +38,11 @@ public class BeerServiceImpl implements BeerService {
             beerPage = beerRepository.findAll(pageRequest);
         }
         beerPagedList = new BeerPagedList(
-                beerPage.getContent().stream().map(beerMapper::beerToBeerDto).collect(Collectors.toList()),
+                beerPage.getContent().stream()
+                        .map(beer -> BooleanUtils.isTrue(showInventoryOnHand) ?
+                                beerMapper.beerToBeerDtoWithInventory(beer) :
+                                beerMapper.beerToBeerDto(beer))
+                        .collect(Collectors.toList()),
                 PageRequest.of(beerPage.getPageable().getPageNumber(),
                         beerPage.getPageable().getPageSize()),
                 beerPage.getTotalElements()
@@ -48,15 +52,19 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public BeerDto findById(UUID beerId) {
-        return beerMapper.beerToBeerDto(beerRepository.findById(beerId).orElseThrow(RuntimeException::new));
+    public BeerDto findById(UUID beerId, Boolean showInventoryOnHand) {
+        Beer foundBeer = beerRepository.findById(beerId).orElseThrow(RuntimeException::new);
+
+        return BooleanUtils.isTrue(showInventoryOnHand) ?
+                beerMapper.beerToBeerDtoWithInventory(foundBeer) :
+                beerMapper.beerToBeerDto(foundBeer);
     }
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
         Beer savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beerDto));
 
-        return beerMapper.beerToBeerDto(savedBeer);
+        return beerMapper.beerToBeerDtoWithInventory(savedBeer);
     }
 
     @Override
@@ -69,6 +77,6 @@ public class BeerServiceImpl implements BeerService {
 //        foundBeer.setQuantityOnHand(beerDto.getQuantityOnHand());
         foundBeer.setPrice(beerDto.getPrice());
 
-        return beerMapper.beerToBeerDto(beerRepository.save(foundBeer));
+        return beerMapper.beerToBeerDtoWithInventory(beerRepository.save(foundBeer));
     }
 }
