@@ -1,6 +1,5 @@
 package com.dela.msscbeerservice.web.models;
 
-import com.dela.msscbeerservice.domain.Beer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -46,10 +45,11 @@ public class BeerDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
 
+//    TODO check mapping of localDateTime (or offsetDateTime) with jackson something is wrong
     @Null
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime createDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy:MM:dd HH:mm:ss")
+    private LocalDateTime createdDate;
     @Null
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    private OffsetDateTime lastModifiedDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy:MM:dd HH:mm:ss")
+    private LocalDateTime lastModifiedDate;
 }

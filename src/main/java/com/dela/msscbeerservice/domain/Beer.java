@@ -1,6 +1,5 @@
 package com.dela.msscbeerservice.domain;
 
-import com.dela.msscbeerservice.web.models.BeerDto;
 import com.dela.msscbeerservice.web.models.BeerStyleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

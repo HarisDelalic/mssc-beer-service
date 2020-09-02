@@ -1,16 +1,18 @@
 package com.dela.msscbeerservice.events;
 
 import com.dela.msscbeerservice.web.models.BeerDto;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class BeerEvent implements Serializable {
 
     static final long serialVersionUID = -8222542150576949094L;
 
-    private final BeerDto beerDto;
+    private BeerDto beerDto;
 }

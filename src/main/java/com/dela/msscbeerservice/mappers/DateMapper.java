@@ -3,31 +3,28 @@ package com.dela.msscbeerservice.mappers;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDateTime;
 
 @Component
 public class DateMapper {
-    Timestamp asTimestamp(OffsetDateTime offsetDateTime) {
-        return (offsetDateTime != null) ?  convertOffsetDateTimeToTimestamp(offsetDateTime) : null;
+    Timestamp asTimestamp(LocalDateTime localDateTime) {
+        return (localDateTime != null) ?  convertLocalDateTimeToTimestamp(localDateTime) : null;
     }
 
-    OffsetDateTime asOffsetDateTime(Timestamp timestamp) {
-        return (timestamp != null) ? convertTimestampToOffsetDateTime(timestamp) : null;
+    LocalDateTime asLocalDateTime(Timestamp timestamp) {
+        return (timestamp != null) ? convertTimestampToLocalDateTime(timestamp) : null;
     }
 
-    private Timestamp convertOffsetDateTimeToTimestamp(OffsetDateTime offsetDateTime) {
-        return Timestamp.valueOf(offsetDateTime.atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+    private Timestamp convertLocalDateTimeToTimestamp(LocalDateTime localDateTime) {
+        return Timestamp.valueOf(localDateTime);
     }
 
-    private OffsetDateTime convertTimestampToOffsetDateTime(Timestamp timestamp) {
-        return OffsetDateTime.of(timestamp.toLocalDateTime().getYear(),
+    private LocalDateTime convertTimestampToLocalDateTime(Timestamp timestamp) {
+        return LocalDateTime.of(timestamp.toLocalDateTime().getYear(),
                 timestamp.toLocalDateTime().getMonthValue(),
                 timestamp.toLocalDateTime().getDayOfMonth(),
                 timestamp.toLocalDateTime().getHour(),
                 timestamp.toLocalDateTime().getMinute(),
-                timestamp.toLocalDateTime().getSecond(),
-                timestamp.toLocalDateTime().getNano(),
-                ZoneOffset.UTC);
+                timestamp.toLocalDateTime().getSecond());
     }
 }

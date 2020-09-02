@@ -1,10 +1,11 @@
-package com.dela.msscbeerservice.web.services;
+package com.dela.msscbeerservice.web.services.brew_service;
 
 import com.dela.msscbeerservice.config.JmsConfig;
 import com.dela.msscbeerservice.domain.Beer;
 import com.dela.msscbeerservice.events.BrewBeerEvent;
 import com.dela.msscbeerservice.mappers.BeerMapper;
 import com.dela.msscbeerservice.repositories.BeerRepository;
+import com.dela.msscbeerservice.web.services.BeerInventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
@@ -32,7 +33,8 @@ public class BreweryServiceImpl implements BreweryService {
 
         if(quantityOnHand <= beer.getMinOnHand()) {
             jmsTemplate
-                    .convertAndSend(JmsConfig.BREWING_REQUEST_QUEUE, new BrewBeerEvent(beerMapper.beerToBeerDto(beer)));
+                    .convertAndSend(JmsConfig.BREWING_REQUEST_QUEUE,
+                            new BrewBeerEvent(beerMapper.beerToBeerDto(beer)));
 
         }
     }
