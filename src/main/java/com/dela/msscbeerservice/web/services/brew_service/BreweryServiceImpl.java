@@ -2,7 +2,7 @@ package com.dela.msscbeerservice.web.services.brew_service;
 
 import com.dela.msscbeerservice.config.JmsConfig;
 import com.dela.msscbeerservice.domain.Beer;
-import com.dela.msscbeerservice.events.BrewBeerEvent;
+import com.dela.events.BrewBeerEvent;
 import com.dela.msscbeerservice.mappers.BeerMapper;
 import com.dela.msscbeerservice.repositories.BeerRepository;
 import com.dela.msscbeerservice.web.services.BeerInventoryService;
@@ -24,7 +24,7 @@ public class BreweryServiceImpl implements BreweryService {
     @Override
     @Scheduled(fixedRate = 5000)
     public void assureAvailability() {
-        log.debug("checking started");
+        log.debug("Checking if there are beers with low quantity");
         beerRepository.findAll().forEach((beer -> checkQuantityOnHandAndSendBrewingEvent(beer)));
     }
 
@@ -32,6 +32,7 @@ public class BreweryServiceImpl implements BreweryService {
         Integer quantityOnHand = beerInventoryService.getQuantityOnHand(beer.getId());
 
         if(quantityOnHand <= beer.getMinOnHand()) {
+            log.debug("Found beer with low quantity, ID: " + beer.getId());
             jmsTemplate
                     .convertAndSend(JmsConfig.BREWING_REQUEST_QUEUE,
                             new BrewBeerEvent(beerMapper.beerToBeerDto(beer)));
