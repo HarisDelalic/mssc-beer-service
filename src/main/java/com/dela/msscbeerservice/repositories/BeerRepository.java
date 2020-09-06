@@ -1,9 +1,8 @@
 package com.dela.msscbeerservice.repositories;
 
 import com.dela.msscbeerservice.domain.Beer;
-import com.dela.msscbeerservice.web.models.BeerStyleEnum;
+import com.dela.brewery.models.BeerStyleEnum;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

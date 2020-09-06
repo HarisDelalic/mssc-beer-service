@@ -1,7 +1,7 @@
 package com.dela.msscbeerservice.mappers;
 
 import com.dela.msscbeerservice.domain.Beer;
-import com.dela.msscbeerservice.web.models.BeerDto;
+import com.dela.brewery.models.BeerDto;
 import com.dela.msscbeerservice.web.services.BeerInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 

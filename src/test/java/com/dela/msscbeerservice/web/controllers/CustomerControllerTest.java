@@ -1,9 +1,7 @@
 package com.dela.msscbeerservice.web.controllers;
 
-import com.dela.msscbeerservice.repositories.CustomerRepository;
-import com.dela.msscbeerservice.web.models.CustomerDto;
+import com.dela.brewery.models.CustomerDto;
 import com.dela.msscbeerservice.web.services.CustomerService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.dela.msscbeerservice;
+package com.dela;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

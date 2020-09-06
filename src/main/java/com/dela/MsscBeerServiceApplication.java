@@ -1,4 +1,4 @@
-package com.dela.msscbeerservice;
+package com.dela;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

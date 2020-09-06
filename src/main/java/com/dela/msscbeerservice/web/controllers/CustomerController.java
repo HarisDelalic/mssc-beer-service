@@ -1,7 +1,6 @@
 package com.dela.msscbeerservice.web.controllers;
 
-import com.dela.msscbeerservice.repositories.CustomerRepository;
-import com.dela.msscbeerservice.web.models.CustomerDto;
+import com.dela.brewery.models.CustomerDto;
 import com.dela.msscbeerservice.web.services.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.dela.msscbeerservice.web.models;
+package com.dela.brewery.models;
 
 import com.dela.msscbeerservice.domain.Customer;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.dela.msscbeerservice.web.services;
 
-import com.dela.msscbeerservice.web.models.CustomerDto;
+import com.dela.brewery.models.CustomerDto;
 
 import java.util.List;
 

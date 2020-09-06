@@ -1,6 +1,6 @@
 package com.dela.msscbeerservice.domain;
 
-import com.dela.msscbeerservice.web.models.CustomerDto;
+import com.dela.brewery.models.CustomerDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.UUID;
 
 @Entity

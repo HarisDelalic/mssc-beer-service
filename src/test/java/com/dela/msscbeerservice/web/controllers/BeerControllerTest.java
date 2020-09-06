@@ -1,8 +1,8 @@
 package com.dela.msscbeerservice.web.controllers;
 
 import com.dela.msscbeerservice.bootstrap.BeerUpcLoader;
-import com.dela.msscbeerservice.web.models.BeerDto;
-import com.dela.msscbeerservice.web.models.BeerStyleEnum;
+import com.dela.brewery.models.BeerDto;
+import com.dela.brewery.models.BeerStyleEnum;
 import com.dela.msscbeerservice.web.services.BeerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

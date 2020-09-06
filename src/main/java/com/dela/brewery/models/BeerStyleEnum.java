@@ -1,4 +1,4 @@
-package com.dela.msscbeerservice.web.models;
+package com.dela.brewery.models;
 
 public enum BeerStyleEnum {
     LAGER,

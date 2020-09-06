@@ -1,4 +1,4 @@
-package com.dela.msscbeerservice.web.models;
+package com.dela.brewery.models;
 
 import com.dela.msscbeerservice.bootstrap.BeerUpcLoader;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -44,11 +44,12 @@ class BeerDtoTest {
 
     @Test
     void deserialize() throws JsonProcessingException {
-        String asJson = "{\"beerId\":\"ac8ce8a3-f88a-43b6-987d-695fde2d019b\",\"version\":3," +
-                "\"beerName\":\"karlovacko\",\"beerStyle\":\"LAGER\"," +
-                "\"upc\":\"" + BeerUpcLoader.BEER_1_UPC + "\",\"quantityOnHand\":123," +
-                "\"price\":\"23\"," +
-                "\"createDate\":\"2020-08-29 01:53:22.000000\",\"lastModifiedDate\":\"2020-08-29 01:53:22\"}\n";
+        String asJson = "{\"version\":3,\"beerName\":\"karlovacko\"," +
+                "\"beerStyle\":\"LAGER\",\"upc\":\"0631234200036\"," +
+                "\"quantityOnHand\":123,\"price\":\"23\"," +
+                "\"createdDate\":\"2020:09:06 18:32:08\"," +
+                "\"lastModifiedDate\":\"2020:09:06 18:32:08\"," +
+                "\"beerId\":\"1d0248c4-e722-4e95-bf25-781e9ffcbbe8\"}\n";
 
         BeerDto dtoFromJson = objectMapper.readValue(asJson, BeerDto.class);
 

@@ -1,8 +1,8 @@
 package com.dela.msscbeerservice.web.controllers;
 
-import com.dela.msscbeerservice.web.models.BeerDto;
-import com.dela.msscbeerservice.web.models.BeerPagedList;
-import com.dela.msscbeerservice.web.models.BeerStyleEnum;
+import com.dela.brewery.models.BeerDto;
+import com.dela.brewery.models.BeerPagedList;
+import com.dela.brewery.models.BeerStyleEnum;
 import com.dela.msscbeerservice.web.services.BeerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;

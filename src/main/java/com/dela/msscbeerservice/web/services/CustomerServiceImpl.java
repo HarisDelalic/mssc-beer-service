@@ -2,7 +2,7 @@ package com.dela.msscbeerservice.web.services;
 
 import com.dela.msscbeerservice.domain.Customer;
 import com.dela.msscbeerservice.repositories.CustomerRepository;
-import com.dela.msscbeerservice.web.models.CustomerDto;
+import com.dela.brewery.models.CustomerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

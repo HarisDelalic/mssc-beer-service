@@ -1,6 +1,6 @@
-package com.dela.events;
+package com.dela.brewery.events;
 
-import com.dela.msscbeerservice.web.models.BeerDto;
+import com.dela.brewery.models.BeerDto;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

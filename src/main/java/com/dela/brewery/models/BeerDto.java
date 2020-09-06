@@ -1,4 +1,4 @@
-package com.dela.msscbeerservice.web.models;
+package com.dela.brewery.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
