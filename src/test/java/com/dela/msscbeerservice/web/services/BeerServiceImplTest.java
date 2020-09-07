@@ -1,13 +1,12 @@
 package com.dela.msscbeerservice.web.services;
 
+import com.dela.brewery.models.BeerDto;
+import com.dela.brewery.models.BeerStyleEnum;
 import com.dela.msscbeerservice.bootstrap.BeerUpcLoader;
 import com.dela.msscbeerservice.domain.Beer;
 import com.dela.msscbeerservice.repositories.BeerRepository;
-import com.dela.brewery.models.BeerDto;
-import com.dela.brewery.models.BeerStyleEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,7 +56,7 @@ class BeerServiceImplTest {
     }
 
     @Test
-    @Disabled
+//    @Disabled
     void when_showInventoryOnHandIsTrue_showQuantityOnHand() {
         Boolean showInventoryOnHand = true;
         when(beerRepository.findById(beer.getId())).thenReturn(Optional.of(beer));

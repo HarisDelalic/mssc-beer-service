@@ -1,7 +1,7 @@
 package com.dela.msscbeerservice.validators;
 
-import com.dela.brewery.models.beerOrder.BeerOrderDto;
-import com.dela.brewery.models.beerOrder.BeerOrderLineDto;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderLineDto;
 import com.dela.msscbeerservice.domain.Beer;
 import com.dela.msscbeerservice.repositories.BeerRepository;
 import org.junit.jupiter.api.BeforeEach;

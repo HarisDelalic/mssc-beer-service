@@ -1,6 +1,6 @@
 package com.dela.brewery.events;
 
-import com.dela.brewery.models.beerOrder.OrderValidationResultDto;
+import com.dela.brewery.models.beer_order.OrderValidationResultDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

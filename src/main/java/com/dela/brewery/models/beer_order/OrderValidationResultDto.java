@@ -1,4 +1,4 @@
-package com.dela.brewery.models.beerOrder;
+package com.dela.brewery.models.beer_order;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,8 +2,8 @@ package com.dela.msscbeerservice.web.listeners;
 
 import com.dela.brewery.events.OrderValidationRequest;
 import com.dela.brewery.events.OrderValidationResponse;
-import com.dela.brewery.models.beerOrder.BeerOrderDto;
-import com.dela.brewery.models.beerOrder.OrderValidationResultDto;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
+import com.dela.brewery.models.beer_order.OrderValidationResultDto;
 import com.dela.msscbeerservice.config.JmsConfig;
 import com.dela.msscbeerservice.validators.OrderValidator;
 import lombok.RequiredArgsConstructor;

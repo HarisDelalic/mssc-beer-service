@@ -1,6 +1,6 @@
 package com.dela.msscbeerservice.validators;
 
-import com.dela.brewery.models.beerOrder.BeerOrderDto;
+import com.dela.brewery.models.beer_order.BeerOrderDto;
 import com.dela.msscbeerservice.repositories.BeerRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
